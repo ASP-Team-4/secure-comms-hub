@@ -180,7 +180,7 @@ const getValidate = function (req, res, next) {
       const minutes = Math.floor(diff / 1000 / 60);
       const expired = minutes > 65 ? true : false;
 
-      res.render("customer/userhome.html", {
+      res.render("customer/userHome.html", {
         active_call: active_call,
         expired: expired,
         customerID: values,
