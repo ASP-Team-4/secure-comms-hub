@@ -12,17 +12,19 @@ const postAgentLogin = function (req, res, next) {
     if (err) {
       next(err);
     } else if (rows.length === 0) {
-      return res
-        .status(403)
-        //.send("You do not have permission to access this resource");
-        .render("agent/invalidlogin.html")
+      return (
+        res
+          .status(403)
+          //.send("You do not have permission to access this resource");
+          .render("agent/invalidlogin.html")
+      );
     } else {
       const agent = rows[0];
-      
-      const token = jwt.sign({agent}, process.env.SECRET_AGENT_KEY, {
-      expiresIn: "1h",
+
+      const token = jwt.sign({ agent }, process.env.SECRET_AGENT_KEY, {
+        expiresIn: "1h",
       });
-       res.cookie("token", token, {
+      res.cookie("token", token, {
         httpOnly: true,
       });
 
@@ -70,16 +72,27 @@ const createActiveCallAndToken = function (req, res, next) {
     values = [customer_id, agentID, randomToken];
   }
 
-  const query =
+  const query1 =
     values.length === 3
       ? "INSERT INTO active_calls (customer_id, agent_id, validation_token) VALUES (?,?,?)"
       : "INSERT INTO active_calls (customer_id, agent_id, callback_id, validation_token) VALUES (?,?,?,?)";
 
-  db.query(query, values, function (err, rows) {
+  db.query(query1, values, function (err, rows) {
     if (err) {
       next(err);
     }
   });
+
+  if (req.body.hasOwnProperty("callback_id")) {
+    const callback_id = req.body.callback_id;
+    const query2 = "UPDATE callbacks SET is_current = 0 WHERE id = ?";
+    const values = [callback_id];
+    db.query(query2, values, function (err, rows) {
+      if (err) {
+        next(err);
+      }
+    });
+  }
   next();
 };
 
@@ -165,9 +178,8 @@ const postValidated = function (req, res, next) {
   const { agent_entered_token_input, random_token, active_call_id } = req.body;
 
   if (String(agent_entered_token_input) !== String(random_token)) {
-     return res.render("agent/notvalidated.html")
+    return res.render("agent/notvalidated.html");
     //return res.send("validation failed");
-   
   }
 
   const query =
@@ -178,7 +190,7 @@ const postValidated = function (req, res, next) {
     if (err) {
       next(err);
     } else {
-      res.render("agent/validated.html")
+      res.render("agent/validated.html");
       //res.send("Successful validation");
     }
   });

@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { createAppointmentSlots, filterAppointmentSlots } = require("../utils");
 
 const getCustomerLogin = function (req, res, next) {
   res.render("customer/login.html");
@@ -56,43 +57,11 @@ const getCustomer = function (req, res, next) {
 
 const getCallback = function (req, res, next) {
   const customerID = req.customer.customer.id;
-  const slots = [];
-  const daysString = ["SUN", "MON", "TUES", "WEDS", "THURS", "FRI", "SAT"];
-  const times = [
-    "10:00:00",
-    "12:00:00",
-    "14:00:00",
-    "16:00:00",
-    "18:00:00",
-    "20:00:00",
-  ];
-  for (let i = 1; i < 8; i++) {
-    const dayOfWeek = new Date(Date.now() + i * 24 * 60 * 60 * 1000);
-
-    const day = daysString[dayOfWeek.getDay()];
-    const date =
-      dayOfWeek.getDate() < 10
-        ? `0${dayOfWeek.getDate()}`
-        : `${dayOfWeek.getDate()}`;
-    const month =
-      dayOfWeek.getMonth() + 1 < 10
-        ? `0${dayOfWeek.getMonth() + 1}`
-        : `${dayOfWeek.getMonth() + 1}`;
-    const year = `${dayOfWeek.getFullYear()}`;
-
-    const fullDate = `${day} ${date}/${month}/${year}`;
-
-    const timestamps = [];
-    for (let j = 0; j < times.length; j++) {
-      timestamps.push(`${year}-${month}-${date} ${times[j]}`);
-    }
-    slots.push({ fullDate, times, timestamps });
-  }
-  //console.log(slots);
+  const slots = createAppointmentSlots();
 
   //compare offered slots with future booked slots only, not past booked slots
   const query =
-    "SELECT id, call_from, customer_id FROM callbacks WHERE call_from >= ? AND id NOT IN (SELECT active_calls.callback_id FROM active_calls)";
+    "SELECT callbacks.id AS callbackID, callbacks.call_from, callbacks.is_current, callbacks.customer_id FROM callbacks WHERE callbacks.call_from >= CURRENT_TIMESTAMP";
   const earliestSlotOffered = slots[0]["timestamps"][0];
   const values = [earliestSlotOffered];
 
@@ -101,34 +70,14 @@ const getCallback = function (req, res, next) {
       next(err);
     } else {
       const callbacks = rows; //callback variable to filter only available slots
-      let existingCallback = null;
-      //TRIPLE FOR LOOP!!!
-      for (let i = 0; i < slots.length; i++) {
-        for (let j = 0; j < slots[i]["timestamps"].length; j++) {
-          for (let k = 0; k < callbacks.length; k++) {
-            //if callback already booked, delete from slots
-            if (
-              new Date(slots[i]["timestamps"][j]).toString() ===
-              new Date(callbacks[k]["call_from"]).toString()
-            ) {
-              //get existing customer callback if exists
-              if (callbacks[k]["customer_id"] === customerID) {
-                existingCallback = callbacks[k];
-              }
-              slots[i]["timestamps"] = slots[i]["timestamps"].filter(
-                (t, index) => index !== j
-              );
-              slots[i]["times"] = slots[i]["times"].filter(
-                (t, index) => index !== j
-              );
-              j--;
-            }
-          }
-        }
-      }
+      const { filteredSlots, existingCallback } = filterAppointmentSlots(
+        slots,
+        callbacks,
+        customerID
+      );
       res.render("customer/schedulecallback.ejs", {
         customerID: customerID,
-        slots: slots,
+        slots: filteredSlots,
         existingCallback: existingCallback,
       });
     }
@@ -142,7 +91,7 @@ const deleteExistingSlot = function (req, res, next) {
     const { existing_callback_id } = req.body;
     const query = "DELETE FROM callbacks WHERE id = ?";
     const values = [existing_callback_id];
-
+    console.log("deleted callback id:", existing_callback_id);
     db.query(query, values, function (err, rows) {
       if (err) {
         next(err);
