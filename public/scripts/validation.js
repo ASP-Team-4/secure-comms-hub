@@ -9,7 +9,7 @@ async function fetchTokenStatus() {
   let is_validated;
   try {
     const response = await fetch(
-      `https://secure-comms-hub.onrender.com/customer/${customerID}/validationresponse/${tokenID}`
+      `http://localhost:3000/customer/${customerID}/validationresponse/${tokenID}`
     );
 
     const data = await response.json();
