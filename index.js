@@ -1,8 +1,10 @@
 const express = require("express");
 const mysql = require("mysql2");
 const app = express();
+const path = require('path');
 var bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+
 
 require("dotenv").config();
 const cors = require("cors");
@@ -50,6 +52,11 @@ app.get("/", (req, res) => {
 app.use("/agent", agentRoutes);
 app.use("/customer", customerRoutes);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
 app.set("port", 3000);
 
 app.use((req, res, next) => {
@@ -59,3 +66,5 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+
+
