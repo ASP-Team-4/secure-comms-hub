@@ -83,7 +83,7 @@ p {
 h1:hover
 {
   transform: scale(1.05);
-  padding-left: 40px;
+  /* padding-left: 40px; */
 }
 
 h2:hover
@@ -142,7 +142,7 @@ input
     font-size: 3em !important;
     color: rgb(85, 58, 159) !important; /* Change text color if needed */
     font-weight: 900;
-    text-align: left;
+    /* text-align: left; */
 }
 
 .welcome-msg:hover
@@ -150,4 +150,57 @@ input
 
     color: rgb(36, 27, 84) !important; /* Change text color if needed */
     font-weight: 900;
+}
+
+.sub-text
+{
+  width: 50%;
+}
+
+.form-group .agent-home {
+    display: flex;
+    justify-content: center; /* Aligns items on the main-axis (horizontally) */
+    align-items: center; /* Aligns items on the cross-axis (vertically) */
+    height: 100vh; /* Sets the height of the container to the full viewport height */
+    flex-direction: column; /* Arranges the flex items in a column */
+    text-align: center; /* Centers the text within its container */
+}
+
+
+.outbound-msg
+{
+      font-family: var(--main-heading);
+    /* font-size: 2rem !important; */
+    color: rgb(85, 58, 159) !important; /* Change text color if needed */
+    font-weight: 900;
+}
+
+.agent-btn-custom {
+    background-image: linear-gradient(to right, rgba(118,82,220,1), rgba(96,73,205,1)); /* Define your gradient */
+    border: none; /* Removes the default border */
+    color: white !important; /* Change text color if needed */
+    font-family: var(--main-heading);
+    font-size: .5em !important;
+    width: 50vw;
+    height: 3vw; /* The button width will be 50% of the viewport width */
+    max-width: 300px; /* Optional: Ensures the button doesn't get too large on wider screens */
+    min-width: 150px; /* Optional: Ensures the button doesn't get too small on narrower screens */
+    max-height: 150px;
+    min-height: 50px;
+}
+
+.agent-btn-custom:hover, .btn-custom:focus {
+    background-image: linear-gradient(to right,rgb(85, 58, 159), rgb(36, 27, 84)); /* Optional: Change gradient on hover/focus */
+    color: white; /* Ensures text color remains visible */
+      transform: scale(1.05); /* Scales the image up to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform */
+}
+
+.code-text
+{
+      font-family: var(--main-heading);
+    font-size: 2em !important;
+    color: rgb(85, 58, 159) !important; /* Change text color if needed */
+    font-weight: 800;
+    /* text-align: left; */
 }
