@@ -1,0 +1,206 @@
+/* @font-face {
+   font-family: Fatpie;
+   src: url('/assets/fonts/FATPIE.otf');
+      } */
+
+    /* @font-face {
+    font-family: 'fat_pieregular';
+    src: url('assets/fonts/fatpie-lightbite-webfont.woff2') format('woff2'),
+         url('assets/fonts/fatpie-lightbite-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'herokidregular';
+    src: url('assets/fonts/herokid_regular-webfont.woff2') format('woff2'),
+         url('assets/fonts/herokid_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+:root {
+  --main-gradient: linear-gradient(90deg, rgba(118,82,220,1) 35%, rgba(96,73,205,1) 100%);
+  --dark-black: #1C0A02;
+
+  /* Global font variables for Headings and logo*/
+  --main-heading: 'Overpass';
+
+  /* Global font variable for paragraph text */
+
+    --main-paragraph-text: 'Courier';
+  --main-description-text: 'herokidregular';
+
+    --sub-text:'Courier';
+
+}
+
+/*Global CSS for the whole website */
+
+* {
+  /* Manages the dimensions of all HTML elements for consistency */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Applies a consistent background color across all pages */
+body {
+  background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(140, 127, 206)); /* Define your gradient */
+    border: none; /* Removes the default border */
+  padding-top: 70px;
+  transition: 0.5s;
+}
+
+/* Standardizes header styles for uniform appearance */
+h1,
+h2,
+h3 {
+  font-family: var(--main-heading);
+  color: var(--dark-black);
+  font-size: 5vh;
+  transition: all 0.2s ease-out;
+  line-height: 1.8em;
+}
+
+/*Lighter weight for paragraph text to emphasize the headers*/
+p {
+    font-size: 2vh;
+    transition: all 0.2s ease-out;
+    font-family: var(--main-heading);
+    font-style: italic;
+    margin: 0 auto;
+    font-weight: bolder;
+    
+}
+
+h1:hover
+{
+  transform: scale(1.05);
+  /* padding-left: 40px; */
+}
+
+h2:hover
+{
+  transform: scale(1.05);
+}
+p:hover {
+  transform: scale(1.05);
+}
+
+/*zoom in effect with smooth animation when hover on images*/
+img {
+  transition: all 0.2s ease-out;
+}
+
+/*defining the zoom scale */
+img:hover {
+  transform: scale(1.05); /* Scales the image up to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform */
+}
+
+a{
+  text-decoration: none;
+}
+
+
+input
+{
+  border-radius: 50px;
+}
+
+.btn-custom {
+    background-image: linear-gradient(to right, rgba(118,82,220,1), rgba(96,73,205,1)); /* Define your gradient */
+    border: none; /* Removes the default border */
+    color: white !important; /* Change text color if needed */
+    font-family: var(--main-heading);
+    font-size: 1.5em !important;
+    width: 50vw;
+    height: 3vw; /* The button width will be 50% of the viewport width */
+    max-width: 300px; /* Optional: Ensures the button doesn't get too large on wider screens */
+    min-width: 150px; /* Optional: Ensures the button doesn't get too small on narrower screens */
+    max-height: 150px;
+    min-height: 50px;
+}
+
+.btn-custom:hover, .btn-custom:focus {
+    background-image: linear-gradient(to right,rgb(85, 58, 159), rgb(36, 27, 84)); /* Optional: Change gradient on hover/focus */
+    color: white; /* Ensures text color remains visible */
+      transform: scale(1.05); /* Scales the image up to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform */
+}
+
+.welcome-msg
+{
+    font-family: var(--main-heading);
+    font-size: 3em !important;
+    color: rgb(85, 58, 159) !important; /* Change text color if needed */
+    font-weight: 900;
+    /* text-align: left; */
+}
+
+.welcome-msg:hover
+{
+
+    color: rgb(36, 27, 84) !important; /* Change text color if needed */
+    font-weight: 900;
+}
+
+.sub-text
+{
+  width: 50%;
+}
+
+.form-group .agent-home {
+    display: flex;
+    justify-content: center; /* Aligns items on the main-axis (horizontally) */
+    align-items: center; /* Aligns items on the cross-axis (vertically) */
+    height: 100vh; /* Sets the height of the container to the full viewport height */
+    flex-direction: column; /* Arranges the flex items in a column */
+    text-align: center; /* Centers the text within its container */
+}
+
+
+.outbound-msg
+{
+      font-family: var(--main-heading);
+    /* font-size: 2rem !important; */
+    color: rgb(85, 58, 159) !important; /* Change text color if needed */
+    font-weight: 900;
+}
+
+.agent-btn-custom {
+    background-image: linear-gradient(to right, rgba(118,82,220,1), rgba(96,73,205,1)); /* Define your gradient */
+    border: none; /* Removes the default border */
+    color: white !important; /* Change text color if needed */
+    font-family: var(--main-heading);
+    font-size: .5em !important;
+    width: 50vw;
+    height: 3vw; /* The button width will be 50% of the viewport width */
+    max-width: 300px; /* Optional: Ensures the button doesn't get too large on wider screens */
+    min-width: 150px; /* Optional: Ensures the button doesn't get too small on narrower screens */
+    max-height: 150px;
+    min-height: 50px;
+}
+
+.agent-btn-custom:hover, .btn-custom:focus {
+    background-image: linear-gradient(to right,rgb(85, 58, 159), rgb(36, 27, 84)); /* Optional: Change gradient on hover/focus */
+    color: white; /* Ensures text color remains visible */
+      transform: scale(1.05); /* Scales the image up to 105% of its original size */
+  transition: transform 0.3s ease; /* Smooth transition for the transform */
+}
+
+.code-text
+{
+      font-family: var(--main-heading);
+    font-size: 2em !important;
+    color: rgb(85, 58, 159) !important; /* Change text color if needed */
+    font-weight: 800;
+    /* text-align: left; */
+}

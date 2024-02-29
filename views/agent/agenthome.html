@@ -5,13 +5,13 @@
   </head>
 
   <body>
-    <%- include('../partials/agentheader'); %>
+    <%- include('../partials/Agentheader'); %>
     <div
       class="d-flex flex-column justify-content-center align-items-center text-center"
       style="min-height: 100vh"
     >
       <div class="form-group mb-2">
-        <p>A code has been generated on User's end</p>
+        <p class="welcome-msg w-75">A code has been generated on User's end</p>
       </div>
       <form
         action="/agent/<%=agentID%>/validated"
@@ -19,9 +19,10 @@
         method="POST"
       >
         <div class="form-group mb-2">
-          <h1 id="codegen" class="fs-4 pb-3">
+          <h1 id="codegen" class="code-text pb-3">
             Please input the code below <%=randomToken%>
           </h1>
+          <h1 class="welcome-msg"><%=randomToken%></h1>
           <label for="inputName" class="sr-only">Name</label>
           <input
             type="text"
@@ -39,7 +40,7 @@
           />
           <input type="hidden" name="random_token" value="<%=randomToken%>" />
         </div>
-        <button type="submit" class="btn btn-primary m-3">Confirm</button>
+        <button type="submit" class="btn btn-custom m-3">Confirm</button>
       </form>
     </div>
 
