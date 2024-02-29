@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql2");
 const app = express();
+const path = require('path');
 var bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
@@ -49,6 +50,8 @@ app.get("/", (req, res) => {
 
 app.use("/agent", agentRoutes);
 app.use("/customer", customerRoutes);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set("port", 3000);
 
