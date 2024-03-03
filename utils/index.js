@@ -64,6 +64,7 @@ const filterAppointmentSlots = (slots, callbacks, customerID) => {
     }
   }
 
+  
   const filteredSlots = slots;
   return {
     filteredSlots,
@@ -71,7 +72,13 @@ const filterAppointmentSlots = (slots, callbacks, customerID) => {
   };
 };
 
+ValidationCodegenerator=()=>{
+  var validationCode= String(Math.random().toString().substring(2, 6));
+  return validationCode;
+}
+
 module.exports = {
+  ValidationCodegenerator,
   createAppointmentSlots,
   filterAppointmentSlots,
 };

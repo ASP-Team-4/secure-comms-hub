@@ -63,7 +63,7 @@ const createActiveCallAndToken = function (req, res, next) {
   const agentID = req.agent.agent.id;
   const { customer_id } = req.body;
   //generate random number of 4 digits - temp function  to be replaced by encrypted function
-  const randomToken = String(Math.random().toString().substring(2, 6));
+  const randomToken = ValidationCodegenerator();//String(Math.random().toString().substring(2, 6));
 
   if (req.body.hasOwnProperty("callback_id")) {
     const callback_id = req.body.callback_id;

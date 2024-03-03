@@ -57,7 +57,7 @@ const getCustomer = function (req, res, next) {
 
 const getCallback = function (req, res, next) {
   const customerID = req.customer.customer.id;
-  const slots = createAppointmentSlots();
+  const slots = AppointmentSlots();
 
   //compare offered slots with future booked slots only, not past booked slots
   const query =
