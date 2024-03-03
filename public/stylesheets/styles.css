@@ -204,3 +204,99 @@ input
     font-weight: 800;
     /* text-align: left; */
 }
+
+/* Css for Calendar */
+
+
+
+/* CSS to align items in a row with flexbox */
+.week-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust the minmax values as needed */
+  gap: 20px; /* Space between grid items */
+  background-color: white !important;
+  padding: 20px; /* Padding around the entire grid */
+}
+
+.day-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.day-container.active {
+  background-color: rgba(118, 82, 220, 1);
+  color: white;
+  border-radius: 15px;
+}
+
+
+.day-container h4 {
+  /* background-color: rgba(118, 82, 220, 1); */
+  color:rgba(118, 82, 220, 1);
+  padding: 10px 20px;
+  border-radius: 10px; /* Rounded corners */
+  margin: 0; /* Remove default margins */
+  font-family: var(--main-heading);
+  font-size: 1rem;
+}
+
+.day-container.active h4 {
+  color: white;
+}
+
+/* Style for individual time slots */
+.time-slot {
+
+  padding: 5px 10px;
+  border-radius: 5px; /* Rounded corners */
+  margin: 5px 0; /* Space between time slots */
+  cursor: pointer; /* Indicate the time slot is clickable */
+  font-family: var(--main-heading);
+  font-size: 1rem;
+}
+
+/* Style for the active time slot */
+.time-slot.active {
+  background-color: rgba(118, 82, 220, 1); /* Same as the day background */
+  color: white;
+}
+
+/* Style for the existing callback if any */
+.existing-callback {
+  color: #ff0000; /* Red color for emphasis */
+  margin-bottom: 20px; /* Space below the existing callback message */
+}
+
+
+@media (max-width: 1500px) {
+  .week-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust for smaller screens */
+  }
+
+  .day-container {
+    margin: 10px 0; /* Adjust margin for potentially tighter layout */
+  }
+}
+
+@media (max-width: 768px) {
+  .week-container {
+    grid-template-columns: 1fr; /* Stack items in a single column on very small screens */
+  }
+
+  .day-container {
+    flex-basis: 100%; /* Each day container takes full width */
+    margin: 10px 0; /* Adjust margin for stacked layout */
+  }
+
+  .day-container h4 {
+    font-size: 0.9rem; /* Adjust font size for smaller screens if necessary */
+  }
+
+  .time-slot {
+    font-size: 0.9rem; /* Adjust font size for smaller screens if necessary */
+  }
+
+}

@@ -6,7 +6,9 @@
 </head>
 
 <body>
-    <%- include('../partials/customerheader'); %>
+
+   <%- include('../partials/customerheader'); %>
+    <!-- <div class="calendar-container" id="calendar">
       <% if (existingCallback!== null) { %>
       <h2>Existing appointment on <%=existingCallback["call_from"]%></h2>
       <form action="/customer/<%=customerID%>/appointmentcancelled" method="POST">
@@ -19,7 +21,7 @@
       <h3>Reschedule appt</h3>
       <% } %>
 
-  
+
     
 <form action="/customer/<%=customerID%>/bookedcallback" method="POST">
   <% for(let i = 0; i < slots.length; i++) { %>
@@ -34,7 +36,69 @@
   <% } %>
   <input type="submit" />
 </form>
+</div> -->
+
+
+<!-- Existing callback display -->
+<% if (existingCallback!== null) { %>
+  <div class="existing-callback">
+      <h2>Existing appointment on <%= existingCallback["call_from"] %></h2>
+      <form action="/customer/<%= customerID %>/appointmentcancelled" method="POST">
+          <h3>Cancel appt</h3>
+          <input type="hidden" name="existing_callback_id" value="<%= existingCallback["callbackID"] %>">
+          <input type="hidden" name="existing_callback_date" value="<%= existingCallback["call_from"] %>">
+          <input type="submit" value="Cancel appointment" />
+      </form>
+  </div>
+<% } %>
+
+<!-- Calendar and appointment booking form -->
+<form action="/customer/<%= customerID %>/bookedcallback" method="POST">
+  <div class="week-container">
+      <!-- Loop through each day and display its full date and available time slots -->
+      <% slots.forEach(function(slot) { %>
+          <div class="day-container">
+              <h4><%= slot.fullDate %></h4>
+              <% slot.timestamps.forEach(function(timestamp, index) { %>
+                  <label class="time-slot">
+                      <input type="radio" name="time" value="<%= timestamp %>" />
+                      <%= slot.times[index] %>
+                  </label>
+              <% }); %>
+          </div>
+      <% }); %>
+  </div>
+  <% if (existingCallback!== null) { %>
+      <input type="hidden" name="existing_callback_id" value="<%= existingCallback["callbackID"] %>">
+  <% } %>
+  <input class= "btn-custom " type="submit" value="Book appointment" />
+</form>
+
+<script>
+  function activateDayContainer(element) {
+    // Find the parent .day-container of the clicked time slot
+    var dayContainer = element.closest('.day-container');
+
+    // Remove 'active' class from all .day-container elements
+    document.querySelectorAll('.day-container').forEach(function(container) {
+        container.classList.remove('active');
+    });
+
+    // Add 'active' class to the clicked .day-container
+    dayContainer.classList.add('active');
+}
+
+document.querySelectorAll('.time-slot').forEach(function(label) {
+        label.addEventListener('click', function() {
+            activateDayContainer(label);
+        });
+    });
+
+</script>
+
 
 </body>
 
 </html>
+
+
