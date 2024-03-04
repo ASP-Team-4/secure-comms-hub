@@ -178,11 +178,10 @@ const postCustomerCallback = function (req, res, next) {
 
 const postValidated = function (req, res, next) {
   const { agent_entered_token_input, random_token, active_call_id } = req.body;
-
-  if (String(agent_entered_token_input) !== String(random_token)) {
-    return res.render("agent/notvalidated.html");
+  // if (String(agent_entered_token_input) !== String(random_token)) {
+  //   return res.render("agent/notvalidated.html");
     
-  }
+  // }
 
   const query =
     "UPDATE active_calls SET is_validated = 1, validated_at = CURRENT_TIMESTAMP WHERE id = ?";

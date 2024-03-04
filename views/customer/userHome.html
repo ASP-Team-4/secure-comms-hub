@@ -13,7 +13,7 @@
       <% if (!expired) {%>
       <div class="form-group mb-2">
         <h1 class="fs-4 p-5">You have a call from the Bank</h1>
-        <p>An agent will confirm the code below on the call </p>
+        <p>An agent will confirm the code below on the call, do not reveal this code  </p>
         <p>only talk to agent when "AGENT VALIDATED" message appears on your screen</p>
         <h1 id="codegen" class="fs-4 p-5">
           <%=active_call["validation_token"]%>
@@ -24,7 +24,7 @@
     <input id="customer-id" type="hidden" value="<%=customerID%>" />
     <input id="token-id" type="hidden" value="<%=active_call["id"]%>" /> <% }
     else { %>
-    <p>No call from bank, please terminate call</p>
+    <p>No call from bank, please terminate call if anyone claims to be calling from the bank</p>
     <%} %>
 
     <script type="module" src="login.js"></script>

@@ -11,7 +11,7 @@
       style="min-height: 100vh"
     >
       <div class="form-group mb-2">
-        <p class="welcome-msg w-75">A code has been generated on User's end</p>
+        <p class="welcome-msg w-75"> authentication code <%=randomToken%> has been generated on User's end</p>
       </div>
       <form
         action="/agent/<%=agentID%>/validated"
@@ -20,18 +20,11 @@
       >
         <div class="form-group mb-2">
           <h1 id="codegen" class="code-text pb-3">
-            Please input the code below <%=randomToken%>
+            call customer and ensure they can check the code at their end.
+      verbally confirm the code before pressing the confirm button to authenticate
           </h1>
-          <h1 class="welcome-msg"><%=randomToken%></h1>
           <label for="inputName" class="sr-only">Name</label>
-          <input
-            type="text"
-            name="agent_entered_token_input"
-            class="form-control pb"
-            id="name"
-            placeholder=""
-            required
-          />
+          
           <input type="hidden" name="customer_id" value="<%=customer_id%>" />
           <input
             type="hidden"
