@@ -1,10 +1,11 @@
 {
   "name": "new-folder-mm",
   "version": "1.0.0",
-  "description": "",
+  "description": "Safe Tool for Bank Fraud",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "devstart":"nodemon index.js",
+    "test": "mocha",
     "build-db": "cat db_schema.sql | sqlite3 database.db #build anew database from the sql file",
     "clean-db": "rm database.db #remove the old database",
     "build-db-win": "sqlite3 database.db < db_schema.sql",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@mysql/xdevapi": "8.0.35",
+    "and": "^0.0.3",
     "body-parser": "^1.20.2",
     "chai": "^5.1.0",
     "cookie-parser": "^1.4.6",
@@ -27,6 +29,18 @@
     "mocha": "^10.3.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1",
+    "nodemon": "^3.1.0",
     "sqlite3": "^5.1.7"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ASP-Team-4/secure-comms-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ASP-Team-4/secure-comms-hub/issues"
+  },
+  "homepage": "https://github.com/ASP-Team-4/secure-comms-hub#readme"
 }

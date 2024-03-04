@@ -13,7 +13,6 @@ async function fetchTokenStatus() {
     );
 
     const data = await response.json();
-    console.log(data);
     is_validated = data["is_validated"];
 
     validationStatus.innerHTML =

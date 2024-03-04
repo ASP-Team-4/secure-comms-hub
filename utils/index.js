@@ -63,7 +63,7 @@ const filterAppointmentSlots = (slots, callbacks, customerID) => {
       }
     }
   }
-
+  
   
   const filteredSlots = slots;
   return {

@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const { ValidationCodegenerator } = require("../utils");
+
 
 const getAgentLogin = function (req, res, next) {
   res.render("agent/agentlogin.html");
@@ -63,7 +65,7 @@ const createActiveCallAndToken = function (req, res, next) {
   const agentID = req.agent.agent.id;
   const { customer_id } = req.body;
   //generate random number of 4 digits - temp function  to be replaced by encrypted function
-  const randomToken = ValidationCodegenerator();//String(Math.random().toString().substring(2, 6));
+  const randomToken =ValidationCodegenerator();// String(Math.random().toString().substring(2, 6));
 
   if (req.body.hasOwnProperty("callback_id")) {
     const callback_id = req.body.callback_id;
@@ -179,7 +181,7 @@ const postValidated = function (req, res, next) {
 
   if (String(agent_entered_token_input) !== String(random_token)) {
     return res.render("agent/notvalidated.html");
-    //return res.send("validation failed");
+    
   }
 
   const query =
@@ -191,7 +193,7 @@ const postValidated = function (req, res, next) {
       next(err);
     } else {
       res.render("agent/validated.html");
-      //res.send("Successful validation");
+      
     }
   });
 };
