@@ -115,6 +115,153 @@ input
   border-radius: 50px;
 }
 
+
+/* nav bar */
+
+/* Sidebar Styles */
+#sidebar {
+  height: 100%;
+  width: 280px;
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hide sidebar by default */
+  background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(140, 127, 206)); /* Define your gradient */
+  transition: 0.5s;
+  z-index: 1000;
+
+}
+
+#sidebar.active {
+  left: 0;
+  box-shadow: 10px 10px 100px rgb(241, 226, 255);
+}
+
+#sidebar ul {
+  list-style-type: none;
+  padding: 50px 0px 50px 0px;
+  margin: 10px;
+}
+
+/* Styles for sidebar links */
+#sidebar ul li a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  font-family: var(--main-heading);
+  font-size: 1em !important;
+  color: grey; /* Default color for inactive links */
+  font-weight: 900;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+#sidebar ul li a.active {
+  color: rgb(85, 58, 159) !important; /* Color for active link */
+}
+
+/* Alternatively, if you want to apply the active style based on a condition without the 'active' class */
+#sidebar ul li a:hover,
+#sidebar ul li a:focus {
+  color: rgb(85, 58, 159); /* Color change on hover or focus for visual feedback */
+}
+
+/* Hamburger Button */
+.toggle-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.toggle-btn span {
+  display: block;
+  width: 30px;
+  height: 5px;
+  background: rgb(85, 58, 159);
+  margin: 5px;
+  transition: transform 0.4s, opacity 0.4s;
+  border-radius: 50px;
+}
+
+
+/* Animation classes */
+.line1-animate {
+  animation: slideOut 0.5s forwards;
+}
+
+.line2-animate {
+  animation: slideOut 0.5s 0.1s forwards;
+}
+
+.line3-animate {
+  animation: slideOut 0.5s 0.2s forwards;
+}
+
+@keyframes slideOut {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Hide toggle button when sidebar is active */
+#sidebar.active + .toggle-btn {
+  display: none;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 100%;
+    left: -100%; /* Hide by default */
+  }
+  #sidebar.active {
+    left: 0;
+  }
+}
+
+.d-flex.flex-column.justify-content-center.align-items-center.text-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh; /* Full viewport height */
+  width: 100%; /* Full viewport width */
+}
+
+
+.d-flex.flex-column.justify-content-center.align-items-center.text-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.selection-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.agent-section, .customer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .selection-container {
+      flex-direction: column;
+      align-items: center;
+  }
+}
+
 .btn-custom {
     background-image: linear-gradient(to right, rgba(118,82,220,1), rgba(96,73,205,1)); /* Define your gradient */
     border: none; /* Removes the default border */
@@ -127,6 +274,10 @@ input
     min-width: 150px; /* Optional: Ensures the button doesn't get too small on narrower screens */
     max-height: 150px;
     min-height: 50px;
+    background-color: transparent;
+    color: inherit; /* Optional, ensures the button text color matches its surroundings */
+
+
 }
 
 .btn-custom:hover, .btn-custom:focus {
@@ -210,11 +361,12 @@ input
 
 
 /* CSS to align items in a row with flexbox */
+
 .week-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust the minmax values as needed */
-  gap: 20px; /* Space between grid items */
-  background-color: white !important;
+  gap: 80px; /* Space between grid items */
+  /* background-color: white !important; */
   padding: 20px; /* Padding around the entire grid */
 }
 
@@ -224,12 +376,14 @@ input
   align-items: center;
   text-align: center;
   padding: 20px;
+  width: 80%;
 }
 
 .day-container.active {
   background-color: rgba(118, 82, 220, 1);
   color: white;
   border-radius: 15px;
+  box-shadow:10px 10px 10px rgb(218, 218, 218);
 }
 
 
@@ -262,6 +416,7 @@ input
 .time-slot.active {
   background-color: rgba(118, 82, 220, 1); /* Same as the day background */
   color: white;
+
 }
 
 /* Style for the existing callback if any */
@@ -269,6 +424,28 @@ input
   color: #ff0000; /* Red color for emphasis */
   margin-bottom: 20px; /* Space below the existing callback message */
 }
+
+
+.but-container {
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center if needed */
+  width: 100%; /* Take up full width to center effectively */
+  margin: 20px 0; /* Optional: Add some margin around the container */
+  text-align: center;
+
+}
+form
+{
+  background-color: none;
+}
+
+.appointment-form {
+
+  /* background-color: white; */
+padding: 50px;
+}
+
 
 
 @media (max-width: 1500px) {
@@ -299,4 +476,62 @@ input
     font-size: 0.9rem; /* Adjust font size for smaller screens if necessary */
   }
 
+}
+
+/* Report Fraud */
+
+/* Adjusted styles for the form container and form */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers items horizontally in the container */
+  justify-content: center; /* Centers items vertically (if the container is full page or has a set height) */
+  padding: 20px; /* Optional: adds some space inside the container */
+  width: 100%; /* Takes the full width of the parent element */
+}
+
+.report-fraud {
+  display: flex;
+  flex-direction: column; /* Stacks form elements vertically */
+  align-items: center; /* Centers the form elements horizontally */
+  width: 100%; /* Optional: Adjust this as needed, perhaps max-width for larger screens */
+  margin: 0 auto; /* Centers the form in the page if it has a max-width */
+}
+
+/* Styles for form elements for consistency and alignment remain the same */
+.report-fraud input[type="text"],
+.report-fraud input[type="datetime-local"],
+.report-fraud textarea,
+.report-fraud input[type="submit"] {
+  width: 90%; /* Makes form elements take up most of the form's width */
+  max-width: 500px; /* Ensures form elements are not too wide on larger screens */
+  margin: 10px 0; /* Adds some vertical space between form elements */
+  padding: 10px; /* Adds some padding inside form elements for text */
+  border: 1px solid #ccc; /* Optional: adds a border to form elements */
+  border-radius: 5px; /* Optional: rounds the corners of the form elements */
+}
+
+/* Styles for labels to improve accessibility and appearance */
+.report-fraud label {
+  margin-top: 20px; /* Adds space above labels for separation */
+  font-weight: bold; /* Makes label text bold */
+  width: 90%; /* Aligns label width with input fields */
+  max-width: 500px; /* Ensures labels are not too wide on larger screens */
+  text-align: left; /* Aligns the label text to the left */
+  display: block; /* Ensures the label takes up the full width available */
+}
+
+/* Media queries for responsive adjustments */
+@media (max-width: 768px) {
+  .form-container, .report-fraud {
+    width: 100%; /* Adjusts width for smaller screens */
+  }
+
+    .report-fraud input[type="text"],
+    .report-fraud input[type="datetime-local"],
+    .report-fraud textarea,
+    .report-fraud input[type="submit"],
+    .report-fraud label {
+    width: 80%; /* Increases width percentage for smaller screens for better usability */
+  }
 }

@@ -41,19 +41,21 @@
 
 <!-- Existing callback display -->
 <% if (existingCallback!== null) { %>
+  <div class="but-container">
   <div class="existing-callback">
-      <h2>Existing appointment on <%= existingCallback["call_from"] %></h2>
+      <h2 class="code-text">Existing appointment on <%= existingCallback["call_from"] %></h2>
       <form action="/customer/<%= customerID %>/appointmentcancelled" method="POST">
-          <h3>Cancel appt</h3>
-          <input type="hidden" name="existing_callback_id" value="<%= existingCallback["callbackID"] %>">
+          <h3 class="code-text">Cancel appt</h3>
+          <input  type="hidden" name="existing_callback_id" value="<%= existingCallback["callbackID"] %>">
           <input type="hidden" name="existing_callback_date" value="<%= existingCallback["call_from"] %>">
-          <input type="submit" value="Cancel appointment" />
+          <input class= "btn-custom" type="submit" value="Cancel appointment" />
       </form>
   </div>
+</div>
 <% } %>
 
 <!-- Calendar and appointment booking form -->
-<form action="/customer/<%= customerID %>/bookedcallback" method="POST">
+<form action="/customer/<%= customerID %>/bookedcallback" method="POST" class="appointment-form">
   <div class="week-container">
       <!-- Loop through each day and display its full date and available time slots -->
       <% slots.forEach(function(slot) { %>
@@ -71,7 +73,10 @@
   <% if (existingCallback!== null) { %>
       <input type="hidden" name="existing_callback_id" value="<%= existingCallback["callbackID"] %>">
   <% } %>
-  <input class= "btn-custom " type="submit" value="Book appointment" />
+  <div class="but-container">
+    <input class= "btn-custom " type="submit" value="Book appointment" />
+  </div>
+  
 </form>
 
 <script>

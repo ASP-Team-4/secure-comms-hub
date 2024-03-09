@@ -11,7 +11,7 @@
     <%- include('../partials/customerheader'); %>
     <div class="d-flex flex-column justify-content-center align-items-center text-center " style="min-height: 100vh;">
         <div class="form-group mb-2">
-            <h1 id="codegen" class="welcome-msg p-5">Hi <%=customer["username"]%>,<br> Welcome Back</h1>
+            <h1 class="welcome-msg" id="codegen" class="welcome-msg p-5">Hi <%=customer["username"]%>,<br> Welcome Back</h1>
             <p class="sub-text">You registered for online banking with us at <%=customer["created_at"]%></p>
             <a href="/customer/<%=customer["id"]%>/schedulecallback"><button class="btn btn-custom m-2" id="btn-agent">Request Callback</button></a>
             <a href="/customer/<%=customer["id"]%>/validate"><button class="btn btn-custom m-2" id="btn-agent">Check if bank is calling</button></a>

@@ -29,9 +29,21 @@
 </head>
 
 <body>
-    <ul id="codegen">
+    
+    <nav id="sidebar">
+        <div class="toggle-btn" onclick="toggleSidebar()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="sub-text" id="codegen">
+          <li><a href="/">Home</a></li>
+        </ul>
+      </nav>
+
+    <!-- <ul id="codegen">
         <li><a href="/">Home</a></li>
-    </ul>
+    </ul> -->
     <div class="d-flex flex-column justify-content-center align-items-center text-center " style="min-height: 100vh;">
         <div class="form-group mb-2">
             <h1 class="welcome-msg p-3">Hi, <br> Please Login.</h1>
@@ -54,7 +66,20 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-
+          
+        
+          <script>
+            function toggleSidebar() {
+              var sidebar = document.getElementById("sidebar");
+              sidebar.classList.toggle("active");
+              
+              // Animate toggle button lines
+              var lines = document.querySelectorAll('.toggle-btn span');
+              lines.forEach(function(line, index) {
+                line.classList.toggle(`line${index + 1}-animate`);
+              });
+            }
+            </script>
 
 </body>
 

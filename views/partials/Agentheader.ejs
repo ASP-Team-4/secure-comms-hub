@@ -1,5 +1,43 @@
 <!-----Navigation bar with links to other pages-->
-<ul id="codegen">
+<!-- <ul id="codegen">
     <li><a href="/agent/agent.ejs">Home</a></li>
     <li><a href="/customer/logout">Log out</a></li>
-   </ul>
+   </ul> -->
+
+   <nav id="sidebar">
+    <div class="toggle-btn" onclick="toggleSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="sub-text" id="codegen">
+      <li><a href="/agent/agent.ejs">Home</a></li>
+      <li><a href="/customer/logout">Log out</a></li>
+    </ul>
+  </nav>
+  
+
+  <script>
+    function toggleSidebar() {
+      var sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("active");
+      
+      // Animate toggle button lines
+      var lines = document.querySelectorAll('.toggle-btn span');
+      lines.forEach(function(line, index) {
+        line.classList.toggle(`line${index + 1}-animate`);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const sidebarLinks = document.querySelectorAll('#sidebar ul li a');
+
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      sidebarLinks.forEach(link => link.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+});
+    </script>
+    
