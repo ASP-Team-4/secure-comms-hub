@@ -1,8 +1,8 @@
 const customerID = document.getElementById("customer-id").value;
 const tokenID = document.getElementById("token-id").value;
+const tokenCreationTime = document.getElementById("token-created-at").value;
 const validationStatus = document.getElementById("validation-status");
 
-let counter = 0;
 let validationInterval = setInterval(fetchTokenStatus, 3000);
 
 async function fetchTokenStatus() {
@@ -18,13 +18,17 @@ async function fetchTokenStatus() {
     validationStatus.innerHTML =
       is_validated === 0
         ? "Await Validation message, bear with us..."
-        : "Agent Validated "; 
+        : "Agent Validated ";
   } catch (error) {
     console.log("ERROR", error);
   }
-  counter++;
-  if (counter > 50 || is_validated === 1) {
+  const diff = Math.abs(new Date() - new Date(tokenCreationTime));
+  const minutes = Math.floor(diff / 1000 / 60);
+
+  if (minutes > 65) {
     clearInterval(validationInterval);
-    console.log("interval func deleted");
+    validationStatus.innerHTML = "Token expired, please terminate call";
+  } else if (is_validated === 1) {
+    clearInterval(validationInterval);
   }
 }
