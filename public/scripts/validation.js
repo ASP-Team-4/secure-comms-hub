@@ -25,7 +25,7 @@ async function fetchTokenStatus() {
   const diff = Math.abs(new Date() - new Date(tokenCreationTime));
   const minutes = Math.floor(diff / 1000 / 60);
 
-  if (minutes > 65) {
+  if (minutes > 61) {
     clearInterval(validationInterval);
     validationStatus.innerHTML = "Token expired, please terminate call";
   } else if (is_validated === 1) {
