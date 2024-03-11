@@ -8,17 +8,14 @@ describe("codegenerator", () => {
   });
 
   it("generates a random code every time", () => {
-    var codes = [];
+    const codes = [];
 
-    const code1 = ValidationCodegenerator();
-    const code2 = ValidationCodegenerator();
-    const code3 = ValidationCodegenerator();
-    const code4 = ValidationCodegenerator();
-    const code5 = ValidationCodegenerator();
-    var codes = [code1, code2, code3, code4, code5];
-    for (var i = 0; i < 5; i++) {
-      console.log(codes[i]);
-      for (var j = 0; j < 5; j++) {
+    for (let i = 0; i < 50; i++) {
+      codes.push(ValidationCodegenerator());
+    }
+
+    for (let i = 0; i < codes.length; i++) {
+      for (let j = 0; j < codes.length; j++) {
         if (i != j) {
           assert(codes[i] !== codes[j]);
         }
@@ -33,7 +30,7 @@ describe("Appointment slot generator", () => {
     const currentTimeStamp = new Date();
     for (var i = 0; i < AppointmentObj.length; i++) {
       for (var j = 0; j < AppointmentObj[i]["timestamps"].length; j++) {
-        var futureTimestamp = new Date(AppointmentObj[i]["timestamps"][j]);
+        const futureTimestamp = new Date(AppointmentObj[i]["timestamps"][j]);
         assert(futureTimestamp > currentTimeStamp);
       }
     }
